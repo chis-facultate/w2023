@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Page</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<label for="myTextBox">Enter Text: </label>
+<input type="text" id="myTextBox" placeholder="Type something...">
+<button id="myButton">Click Me</button>
+
+<script>
+    $(document).ready(function () {
+        // Attach a click event handler to the button
+        $("#myButton").on("click", function () {
+            // Get the value from the text box
+            var inputValue = $("#myTextBox").val();
+
+            // Make an AJAX GET request to the /x endpoint on localhost with the text box value
+            $.ajax({
+                url: `http://localhost:8080/search/${inputValue}`,
+                type: 'GET',
+                success: function(data) {
+                    console.log('Success:', data);
+                    // Handle the response data as needed
+
+                },
+                error: function(error) {
+                    console.error('Error:', error);
+                    // Handle the error as needed
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
